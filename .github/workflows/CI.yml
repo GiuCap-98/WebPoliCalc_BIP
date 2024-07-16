@@ -1,0 +1,38 @@
+name: Test API
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 'python:3.9-slim'
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Set up environment variables
+      run: |
+        export FLASK_APP=api.py
+        export FLASK_ENV=testing
+
+    - name: Run tests
+      run: |
+        source venv/bin/activate
+        pytest test_api.py
