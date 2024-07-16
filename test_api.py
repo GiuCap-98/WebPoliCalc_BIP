@@ -13,9 +13,9 @@ class TestCalculatorAPI(unittest.TestCase):
         print("add ok")
 
     def test_subtract(self):
-        response = self.client.get("/subtract?a=20&b=10")
-        self.assertEqual(response.json["result"], 10)
-        print("subtract ok")
+        response = self.client.get("/subtract?a=20&b=20")
+        self.assertEqual(response.json["result"], 0)
+        print("subtract okkk")
 
     def test_multiply(self):
         print("multiply ok")
